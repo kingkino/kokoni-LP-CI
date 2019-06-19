@@ -1,0 +1,24 @@
+# HTML
+- task: AzureFileCopy@3
+  inputs:
+    SourcePath: 'D:\a\1\s\'
+    azureSubscription: 'Microsoft Azure Sponsorship MVP!(99b1acdd-6b1a-46d7-b38f-3b8e2fb00db8)'
+    Destination: 'AzureBlob'
+    storage: 'kokonicommon'
+    ContainerName: '$web'
+# Archive your static HTML project and save it with the build record.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(build.sourcesDirectory)'
+    includeRootFolder: false
+- task: PublishBuildArtifacts@1
